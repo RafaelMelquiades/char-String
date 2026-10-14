@@ -95,10 +95,65 @@ void textoChar()
   int idade = atoi(idadeTexto);
   Serial.println(idade);
 
-  
-  
-  
-  
+  //montando texto
+  char buffer[100];
+  char* local = "Sala de aula";
+  float temperatura = 26.4;
+  int umidade = 58;
+
+  // \n = mudanca de linha.
+  // \r = retorno ao comeco da linha.
+  sniprintf(buffer, sizeof(buffer), "%s | Temp.: %f | Umid.: %d %% \n\r", local, temperatura, umidade);
+  // %s = string(formatar texto), %f = float(numero decimal), %d = int(numero inteiro), %% = porcento.
+  Serial.print(buffer);
+  Serial.println("Senai");
+
+  /*
+  snprintf = monta um texto dentro de um vetor de char.
+  sintaxe: snprintf(variavelOndeSeraMontadoOTexto, tamanhoMaximoDoTexto, textoComEspecificadores, itensDeFormato)
+  isso e muito util quando depois voce quer:
+   - salvar o texto em uma variavel;
+   - mandar para o display;
+   - imprimir na serial;
+   - enviar por MQTT(IoT);
+  */
+
+  /*ESPECIFICADORES:
+
+  %d ou %i = int
+  %u       = unsigned int 
+  %ld      = long
+  %lu      = unsigned long
+  %f       = float
+  %e       = notacao cientifica
+  %g       = float, formato mais curto
+  %c       = char
+  %s       = char*(string)
+  %x ou %X = hexadecimal minusculo/maiusculo
+  %o       = octal
+  %p       = ponteiro
+  %%       = porcento(%)
+
+  */
+
+  /*
+  FLAG, LARGURA E PRECISAO
+
+  %5d    - imprime com largura minima de 5, alinhado a direita [    3], [  100], [10000000]
+  %.4d   - imprime com largura minima de 4, alinhado a esquerda [3   ], [100 ], [123456]
+  %03d   - completa com zeros a esquerda, [003]
+  %+d    - sempre mostra o sinal [+3], [-3]
+  %.2f   - 2 casas decimais num float
+  %4.2f  - largura minima 4 a direita com 2 casas decimais
+  %02X   - hexadecimal com 2 digitos [OF] [3A]
+  %#x    - imprime o prefixo 0x [0x2a] [0xF]
+  %.3s   - somente os 3 primeiros caracteres da string
+  %*d    - largura passada como argumento ex.:
+                                      int largura = 3;
+                                      int numero = 9;
+                                      snprintf(buffer,sizeof(buffer), "numero %*d", largura, numero)
+                                      Serial.print(buffer) -> [  9]
+  */
 }
 
 void textoString()
